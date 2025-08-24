@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reformas Pro | Servicios Integrales de Reforma</title>
+    <title> M.C.V, Reformas Servicios Integrales de Reforma</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -68,7 +68,7 @@
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), 
-                        url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920') center/cover;
+                        url('images/im6.jpeg') center/cover;
             height: 100vh;
             display: flex;
             align-items: center;
@@ -155,31 +155,41 @@
             color: #2c3e50;
         }
 
-        /* Galería */
-        .gallery {
+        /* Galería con imágenes reales */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
             margin-top: 2rem;
         }
 
-        .gallery-item {
+        .gallery-item-real {
             position: relative;
             overflow: hidden;
-            border-radius: 10px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            background: #f5f5f5;
             cursor: pointer;
-            height: 250px;
+            aspect-ratio: 4/3;
         }
 
-        .gallery-item img {
+        .gallery-item-real:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item-real img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
+            display: block;
         }
 
         /* Reseñas */
@@ -202,60 +212,41 @@
             margin-bottom: 1rem;
         }
 
-        /* Contacto y Presupuesto */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-top: 2rem;
-        }
-
-        .contact-form, .quote-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .submit-btn {
-            background: #f39c12;
+        /* Contacto simplificado */
+        .contact-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s;
+            padding: 4rem 2rem;
+            text-align: center;
         }
 
-        .submit-btn:hover {
-            background: #e67e22;
+        .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            font-size: 1.3rem;
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: #f39c12;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: #f39c12;
         }
 
         /* Footer */
@@ -264,7 +255,37 @@
             color: white;
             text-align: center;
             padding: 2rem;
-            margin-top: 4rem;
+        }
+
+        /* Modal para galería */
+        .modal-gallery {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .modal-gallery-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 60px;
+            border-radius: 10px;
+        }
+
+        .close-gallery {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         /* Animaciones */
@@ -287,39 +308,17 @@
             .hero-content h1 {
                 font-size: 2.5rem;
             }
-            .contact-grid {
+            .gallery-grid {
                 grid-template-columns: 1fr;
             }
-        }
-
-        /* Modal para galería */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-        }
-
-        .modal-content {
-            margin: auto;
-            display: block;
-            max-width: 90%;
-            max-height: 90%;
-            margin-top: 60px;
-        }
-
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .contact-item i {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -327,7 +326,7 @@
     <!-- Header -->
     <header>
         <nav>
-            <div class="logo">ReformasPro</div>
+            <div class="logo">M.C.V. Reformas</div>
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#servicios">Servicios</a></li>
@@ -343,7 +342,7 @@
         <div class="hero-content">
             <h1>Transformamos tu espacio con profesionalidad</h1>
             <p>Servicios integrales de reforma con materiales de alta calidad</p>
-            <a href="#contacto" class="cta-button">Solicitar Presupuesto</a>
+            <a href="#contacto" class="cta-button">Contactar Ahora</a>
         </div>
     </section>
 
@@ -384,27 +383,29 @@
         </div>
     </section>
 
-    <!-- Galería -->
+    <!-- Galería con imágenes reales -->
     <section id="galeria">
         <h2 class="section-title">Nuestros Trabajos</h2>
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=400" alt="Reforma cocina">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400" alt="Reforma baño">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400" alt="Reforma salón">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400" alt="Piscina">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400" alt="Fachada">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400" alt="Local comercial">
+        <div class="gallery-container">
+            <div class="gallery-grid">
+                <div class="gallery-item-real" onclick="openModal('im1.jpeg')">
+                    <img src="images/im1.jpeg" alt="Trabajo 1">
+                </div>
+                <div class="gallery-item-real" onclick="openModal('im2.jpeg')">
+                    <img src="images/im2.jpeg" alt="Trabajo 2">
+                </div>
+                <div class="gallery-item-real" onclick="openModal('im3.jpeg')">
+                    <img src="images/im3.jpeg" alt="Trabajo 3">
+                </div>
+                <div class="gallery-item-real" onclick="openModal('im4.jpeg')">
+                    <img src="images/im4.jpeg" alt="Trabajo 4">
+                </div>
+                <div class="gallery-item-real" onclick="openModal('im5.jpeg')">
+                    <img src="images/im5.jpeg" alt="Trabajo 5">
+                </div>
+                <div class="gallery-item-real" onclick="openModal('im6.jpeg')">
+                    <img src="images/im6.jpeg" alt="Trabajo 6">
+                </div>
             </div>
         </div>
     </section>
@@ -477,75 +478,35 @@
         </div>
     </section>
 
-    <!-- Contacto y Presupuesto -->
-    <section id="contacto">
-        <h2 class="section-title">Contacto y Presupuestos</h2>
-        <div class="contact-grid">
-            <div class="contact-form">
-                <h3 style="margin-bottom: 1rem;">Contacta con nosotros</h3>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label>Nombre</label>
-                        <input type="text" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Teléfono</label>
-                        <input type="tel" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Mensaje</label>
-                        <textarea placeholder="Cuéntanos sobre tu proyecto..."></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Enviar Mensaje</button>
-                </form>
+    <!-- Contacto simplificado con teléfono y email -->
+    <section id="contacto" class="contact-section">
+        <h2 class="section-title" style="color: white;">Contacto</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:c.bersanete@outlook.es">c.bersanete@outlook.es</a>
             </div>
-            
-            <div class="quote-form">
-                <h3 style="margin-bottom: 1rem;">Solicitar Presupuesto</h3>
-                <form id="quoteForm">
-                    <div class="form-group">
-                        <label>Tipo de reforma</label>
-                        <select required>
-                            <option value="">Selecciona una opción</option>
-                            <option value="integral">Reforma integral</option>
-                            <option value="cocina">Reforma cocina</option>
-                            <option value="bano">Reforma baño</option>
-                            <option value="local">Reforma local comercial</option>
-                            <option value="otros">Otros</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Metros cuadrados</label>
-                        <input type="number" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Presupuesto estimado</label>
-                        <input type="number" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Descripción del proyecto</label>
-                        <textarea placeholder="Describe tu proyecto en detalle..."></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Solicitar Presupuesto</button>
-                </form>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <a href="tel:+34662932852"> 662 93 28 52</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-clock"></i>
+                <span>Disponibles de lunes a viernes de 8:00 a 18:00</span>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 ReformasPro. Todos los derechos reservados.</p>
-        <p> | Email:  c.bersanete@outlook.es</p>
+        <p>&copy; 2025 M.C.V. Reformas. Todos los derechos reservados.</p>
+        <p>Email: c.bersanete@outlook.es | Tel: +34 662 93 28 52</p>
     </footer>
 
     <!-- Modal para galería -->
-    <div id="imageModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="modalImg">
+    <div id="modalGallery" class="modal-gallery">
+        <span class="close-gallery">&times;</span>
+        <img class="modal-gallery-content" id="modalImgGallery">
     </div>
 
     <script>
@@ -564,39 +525,23 @@
         });
 
         // Galería modal
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImg');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        const closeBtn = document.querySelector('.close');
+        const modalGallery = document.getElementById('modalGallery');
+        const modalImgGallery = document.getElementById('modalImgGallery');
+        const closeBtnGallery = document.querySelector('.close-gallery');
 
-        galleryItems.forEach(item => {
-            item.addEventListener('click', function() {
-                modal.style.display = 'block';
-                modalImg.src = this.querySelector('img').src;
-            });
-        });
+        function openModal(imageSrc) {
+            modalGallery.style.display = 'block';
+            modalImgGallery.src = 'images/' + imageSrc;
+        }
 
-        closeBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
+        closeBtnGallery.addEventListener('click', function() {
+            modalGallery.style.display = 'none';
         });
 
         window.addEventListener('click', function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
+            if (event.target == modalGallery) {
+                modalGallery.style.display = 'none';
             }
-        });
-
-        // Formularios
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
-            this.reset();
-        });
-
-        document.getElementById('quoteForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('¡Presupuesto solicitado! Te enviaremos una respuesta en las próximas 24-48 horas.');
-            this.reset();
         });
 
         // Animación al hacer scroll
@@ -613,7 +558,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.service-card, .review-card, .gallery-item').forEach(el => {
+        document.querySelectorAll('.service-card, .review-card, .gallery-item-real').forEach(el => {
             observer.observe(el);
         });
     </script>
